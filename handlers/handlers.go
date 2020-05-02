@@ -7,8 +7,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	"github.com/solrac97gr/yendo/middlewares"
-	"github.com/solrac97gr/yendo/routers"
+	"github.com/solrac97gr/yendoapi/middlewares"
+	"github.com/solrac97gr/yendoapi/routers"
 )
 
 /*Handlers : set the port,cors,handlers and then serve the api*/

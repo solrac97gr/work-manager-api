@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/solrac97gr/yendo/database"
+	"github.com/solrac97gr/yendoapi/database"
 )
 
 /*GetProfile : Get the user profile*/

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/solrac97gr/yendo/models"
+	"github.com/solrac97gr/yendoapi/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

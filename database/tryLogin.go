@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/solrac97gr/yendo/models"
+	"github.com/solrac97gr/yendoapi/models"
 	"golang.org/x/crypto/bcrypt"
 )
 

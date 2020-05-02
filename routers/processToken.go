@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/solrac97gr/yendo/database"
-	"github.com/solrac97gr/yendo/models"
+	"github.com/solrac97gr/yendoapi/database"
+	"github.com/solrac97gr/yendoapi/models"
 )
 
 /*Email : value of the user email*/

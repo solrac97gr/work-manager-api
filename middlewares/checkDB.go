@@ -3,7 +3,7 @@ package middlewares
 import (
 	"net/http"
 
-	"github.com/solrac97gr/yendo/database"
+	"github.com/solrac97gr/yendoapi/database"
 )
 
 /*CheckDB : Check the DB conection before to execute a handle func*/

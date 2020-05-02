@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/solrac97gr/yendo/database"
-	"github.com/solrac97gr/yendo/jwt"
-	"github.com/solrac97gr/yendo/models"
+	"github.com/solrac97gr/yendoapi/database"
+	"github.com/solrac97gr/yendoapi/jwt"
+	"github.com/solrac97gr/yendoapi/models"
 )
 
 /*Login : user try to login in the app*/

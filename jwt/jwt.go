@@ -4,7 +4,7 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/solrac97gr/yendo/models"
+	"github.com/solrac97gr/yendoapi/models"
 )
 
 /*GenerateJWT : Generate token with user info*/

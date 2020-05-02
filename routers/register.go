@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/solrac97gr/yendo/database"
-	"github.com/solrac97gr/yendo/models"
+	"github.com/solrac97gr/yendoapi/database"
+	"github.com/solrac97gr/yendoapi/models"
 )
 
 /*Register : Save a user in the database*/

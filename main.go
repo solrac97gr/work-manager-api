@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/solrac97gr/twitter-fake/database"
-	"github.com/solrac97gr/twitter-fake/handlers"
+	"github.com/solrac97gr/yendoapi/database"
+	"github.com/solrac97gr/yendoapi/handlers"
 )
 
 func main() {

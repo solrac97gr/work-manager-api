@@ -3,7 +3,7 @@ package middlewares
 import (
 	"net/http"
 
-	"github.com/solrac97gr/yendo/routers"
+	"github.com/solrac97gr/yendoapi/routers"
 )
 
 /*CheckToken : Check the validate of the token*/
