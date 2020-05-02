@@ -1,14 +1,15 @@
 package test
 
 import (
-	"github.com/solrac97gr/yendoapi/database"
 	"testing"
+
+	"github.com/solrac97gr/yendoapi/database"
 )
 
 func TestDbConnection(t *testing.T) {
-	actual := true
+	expected := true
 	isConnected := database.ConnectionOK()
-	if actual != isConnected {
+	if expected != isConnected {
 		t.Fail()
 	}
 }

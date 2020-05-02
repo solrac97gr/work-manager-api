@@ -18,6 +18,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Bad request "+err.Error(), 400)
 		return
 	}
+	user.Birthdate = user.Birthdate.Format("13-04-1997")
 	/*Validation*/
 	if len(user.Email) == 0 {
 		http.Error(w, "Email is required", 400)
