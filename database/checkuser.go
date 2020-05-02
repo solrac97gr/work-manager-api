@@ -14,7 +14,7 @@ func UserExist(email string) (models.User, bool, string) {
 		30*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twitter")
+	db := MongoCN.Database("yendo")
 	col := db.Collection("users")
 
 	condition := bson.M{"email": email}

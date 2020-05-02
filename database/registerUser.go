@@ -14,7 +14,7 @@ func UserRegister(user models.User) (string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twitter")
+	db := MongoCN.Database("yendo")
 	col := db.Collection("users")
 
 	user.Password, _ = EncryptPassword(user.Password)

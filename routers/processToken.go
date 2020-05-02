@@ -17,7 +17,7 @@ var UserID string
 
 /*ProcessToken : Process token and extract values*/
 func ProcessToken(token string) (*models.Claim, bool, string, error) {
-	myKey := []byte("thisisnotwitter")
+	myKey := []byte("thisisnotyendo")
 	claims := &models.Claim{}
 
 	splitToken := strings.Split(token, "Bearer")

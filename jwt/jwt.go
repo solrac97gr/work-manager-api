@@ -9,7 +9,7 @@ import (
 
 /*GenerateJWT : Generate token with user info*/
 func GenerateJWT(user models.User) (string, error) {
-	myKey := []byte("thisisnotwitter")
+	myKey := []byte("thisisnotyendo")
 	payload := jwt.MapClaims{
 		"email":     user.Email,
 		"name":      user.Name,
