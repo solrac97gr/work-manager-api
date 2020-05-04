@@ -10,7 +10,6 @@ import (
 
 /*UpdateWork : Edit a user profile*/
 func UpdateWork(w http.ResponseWriter, r *http.Request) {
-	ID := r.URL.Query().Get("id")
 	var work models.Work
 	var isUpdated bool
 
@@ -20,7 +19,7 @@ func UpdateWork(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	isUpdated, err = database.UpdateWork(work, ID)
+	isUpdated, err = database.UpdateWork(work)
 	if err != nil {
 		http.Error(w, "Error ocurred"+err.Error(), 400)
 		return

@@ -7,11 +7,10 @@ import (
 
 	"github.com/solrac97gr/yendoapi/models"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 /*UpdateWork : Update a existe work*/
-func UpdateWork(work models.Work, ID string) (bool, error) {
+func UpdateWork(work models.Work) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -40,7 +39,7 @@ func UpdateWork(work models.Work, ID string) (bool, error) {
 		"$set": register,
 	}
 
-	objtID, _ := primitive.ObjectIDFromHex(ID)
+	objtID := work.ID
 
 	filter := bson.M{"_id": bson.M{"$eq": objtID}}
 
