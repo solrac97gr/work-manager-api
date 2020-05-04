@@ -13,7 +13,7 @@ Yendo Api es un desarrollo hecho con golang y mongoDB que te permite gestionar u
 | Obtener Perfil        | /profile   | id                          | Lanzada    | Si        | GET    |
 | Editar perfil         | /profile   | id                          | Lanzada    | Si        | PUT    |
 | Crear Trabajo         | /work      | ninguno                     | Lanzada    | Si        | POST   |
-| Actualizar Trabajo    | /work      | id                          | No lanzada | Si        | PUT    |
+| Actualizar Trabajo    | /work      | id                          | Lanzada    | Si        | PUT    |
 | Eliminar Trabajo      | /work      | id                          | No lanzada | Si        | DELETE |
 | Listar Trabajos       | /work      | category,id,idate,fdate     | No lanzada | Si        | GET    |
 | Crear pago            | /pay       | ninguno                     | No lanzada | Si        | POST   |

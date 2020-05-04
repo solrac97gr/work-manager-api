@@ -22,7 +22,7 @@ func Handlers() {
 	router.HandleFunc("/profile", middlewares.CheckDB(middlewares.CheckToken(routers.UpdateProfile))).Methods("PUT")
 	/*Work :Complete CRUD */
 	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routers.CreateWork))).Methods("POST")
-	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routers.CreateWork))).Methods("PUT")
+	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routers.UpdateWork))).Methods("PUT")
 	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routers.CreateWork))).Methods("DELETE")
 	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routers.CreateWork))).Methods("GET")
 
