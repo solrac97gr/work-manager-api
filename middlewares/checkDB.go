@@ -6,7 +6,7 @@ import (
 	"github.com/solrac97gr/yendoapi/database"
 )
 
-/*CheckDB : Check the DB conection before to execute a handle func*/
+/*CheckDB : Check the DB connection before to execute a handle func*/
 func CheckDB(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !database.ConnectionOK() {

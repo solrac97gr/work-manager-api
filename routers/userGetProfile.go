@@ -18,11 +18,11 @@ func GetProfile(w http.ResponseWriter, r *http.Request) {
 
 	profile, err := database.SearchProfile(ID)
 	if err != nil {
-		http.Error(w, "Error Ocurred"+err.Error(), 400)
+		http.Error(w, "Error Occurred"+err.Error(), 400)
 		return
 	}
 
 	w.Header().Set("content-type", "application/json")
 	w.WriteHeader(http.StatusAccepted)
-	json.NewEncoder(w).Encode(&profile)
+	_ = json.NewEncoder(w).Encode(&profile)
 }
