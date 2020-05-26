@@ -7,7 +7,7 @@ import (
 	"github.com/solrac97gr/yendoapi/models"
 )
 
-/*GenerateJWT : Generate token with user info*/
+/*GenerateJWT : Generate jwt with user info*/
 func GenerateJWT(user models.User) (string, error) {
 	myKey := []byte("thisisnotyendo")
 	payload := jwt.MapClaims{

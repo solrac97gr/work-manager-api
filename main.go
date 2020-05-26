@@ -9,7 +9,7 @@ import (
 
 func main() {
 	if !database.ConnectionOK() {
-		log.Fatal("Not conected to DB")
+		log.Fatal("Not connected to DB")
 		return
 	}
 	handlers.Handlers()
