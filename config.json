@@ -1,8 +1,0 @@
-{
-  "db": {
-    "user":"root",
-    "password":"-solrac97G",
-    "server":"golang-course-olaby.mongodb.net",
-    "cluster":"test"
-  }
-}
