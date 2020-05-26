@@ -13,9 +13,20 @@ import (
 
 /*MongoCN : content a mongoDB connection*/
 var MongoCN = ConnectDB()
-var Config = func() models.Configuration{
+/*Config : all config file content*/
+var Config = LoadConfiguration()
+
+var clientOptions = options.Client().ApplyURI(fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
+	Config.DB.User,
+	Config.DB.Password,
+	Config.DB.Server,
+	Config.DB.Cluster,
+))
+
+/*LoadConfiguration: load all configuration file*/
+func LoadConfiguration() models.Configuration {
 	var configuration models.Configuration
-	file,err:=os.Open("./config.json")
+	file, err := os.Open("./config.json")
 	if err != nil {
 		log.Fatal("Error reading the file")
 	}
@@ -27,13 +38,6 @@ var Config = func() models.Configuration{
 	}
 	return configuration
 }
-
-var clientOptions = options.Client().ApplyURI(fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
-	Config().DB.User,
-	Config().DB.Password,
-	Config().DB.Server,
-	Config().DB.Cluster,
-))
 
 /*ConnectDB : Create a connection to mongoDB and return the connection*/
 func ConnectDB() *mongo.Client {
