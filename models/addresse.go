@@ -6,10 +6,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-/*Addresse : The model represent the job adress*/
-type Addresse struct {
+/*Address : The model represent the job address*/
+type Address struct {
 	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	Distrit     string             `bson:"district" json:"distric,omitempty"`
+	District    string             `bson:"district" json:"district,omitempty"`
 	FullAddress string             `bson:"full_address" json:"full_address,omitempty"`
 	Reference   string             `bson:"reference" json:"reference,omitempty"`
 	CreateAt    time.Time          `bson:"create_at" json:"create_at,omitempty"`

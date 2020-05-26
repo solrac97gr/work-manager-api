@@ -2,16 +2,38 @@ package database
 
 import (
 	"context"
-	"log"
-
+	"encoding/json"
+	"fmt"
+	"github.com/solrac97gr/yendoapi/models"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"log"
+	"os"
 )
 
 /*MongoCN : content a mongoDB connection*/
 var MongoCN = ConnectDB()
+var Config = func() models.Configuration{
+	var configuration models.Configuration
+	file,err:=os.Open("./config.json")
+	if err != nil {
+		log.Fatal("Error reading the file")
+	}
+	defer file.Close()
+	decoder := json.NewDecoder(file)
+	err = decoder.Decode(&configuration)
+	if err != nil {
+		log.Fatal("can't decode config JSON: ", err)
+	}
+	return configuration
+}
 
-var clientOptions = options.Client().ApplyURI("mongodb+srv://root:-solrac97G@golang-course-olaby.mongodb.net/test?retryWrites=true&w=majority")
+var clientOptions = options.Client().ApplyURI(fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
+	Config().DB.User,
+	Config().DB.Password,
+	Config().DB.Server,
+	Config().DB.Cluster,
+))
 
 /*ConnectDB : Create a connection to mongoDB and return the connection*/
 func ConnectDB() *mongo.Client {

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"log"
-
 	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/handlers"
+	"log"
 )
+
 
 func main() {
 	if !database.ConnectionOK() {
