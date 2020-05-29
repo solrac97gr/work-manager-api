@@ -13,15 +13,19 @@ import (
 
 /*MongoCN : content a mongoDB connection*/
 var MongoCN = ConnectDB()
+
 /*Config : all config file content*/
 var Config = LoadConfiguration()
 
-var clientOptions = options.Client().ApplyURI(fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
-	Config.DB.User,
-	Config.DB.Password,
-	Config.DB.Server,
-	Config.DB.Cluster,
-))
+var clientOptions = options.Client().ApplyURI(
+	fmt.Sprintf(
+		"mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
+		Config.DB.User,
+		Config.DB.Password,
+		Config.DB.Server,
+		Config.DB.Cluster,
+	),
+)
 
 /*LoadConfiguration: load all configuration file*/
 func LoadConfiguration() models.Configuration {
