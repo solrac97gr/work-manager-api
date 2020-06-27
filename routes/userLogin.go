@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber"
 	"net/http"
 	"time"
 
@@ -11,44 +11,52 @@ import (
 )
 
 /*Login : user try to login in the app*/
-func Login(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("content-type", "application/json")
+func Login(c *fiber.Ctx) {
+	c.Accepts("application/json")
 
 	var user models.User
-
-	err := json.NewDecoder(r.Body).Decode(&user)
-	if err != nil {
-		http.Error(w, "User or password invalid"+err.Error(), 400)
+	if err := c.BodyParser(user); err !=nil{
+		c.Send("User or password invalid"+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
+
 	if len(user.Email) == 0 {
-		http.Error(w, "Email is required", 400)
+		c.Send("Email is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
 	document, exist := database.TryLogin(user.Email, user.Password)
 	if !exist {
-		http.Error(w, "User or password invalid", 400)
+		c.Send("User or password invalid")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	jwtKey, err := jwt.GenerateJWT(document)
 	if err != nil {
-		http.Error(w, "Error occurred"+err.Error(), 400)
+		c.Send("Error occurred"+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	res := models.LoginResponse{
 		Token: jwtKey,
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	_ = json.NewEncoder(w).Encode(res)
+
+	c.Accepts("application/json")
+	c.SendStatus(http.StatusCreated)
+
+	if err := c.JSON(res); err != nil {
+		c.Status(500).Send(err)
+		return
+	}
 
 	expirationTime := time.Now().Add(24 * time.Hour)
-	http.SetCookie(w, &http.Cookie{
-		Name:    "jwt",
-		Value:   jwtKey,
-		Expires: expirationTime,
-	})
+	cookie := new(fiber.Cookie)
+	cookie.Name = "jwt"
+	cookie.Value = jwtKey
+	cookie.Expires = expirationTime
+	c.Cookie(cookie)
 
 }

@@ -1,6 +1,8 @@
 package models
 
 import (
+	validation "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/go-ozzo/ozzo-validation/v4/is"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -16,4 +18,16 @@ type User struct {
 	Password  string             `bson:"password" json:"password,omitempty"`
 	Avatar    string             `bson:"avatar" json:"avatar,omitempty"`
 	Location  string             `bson:"location" json:"location,omitempty"`
+}
+
+func (u *User) Validate() error {
+	return validation.ValidateStruct(u,
+		validation.Field(&u.Name,validation.Required),
+		validation.Field(&u.Lastname,validation.Required),
+		validation.Field(&u.Birthdate,validation.Required),
+		validation.Field(&u.Email, validation.Required, is.Email),
+		validation.Field(&u.Password,validation.Required),
+		validation.Field(&u.Avatar,validation.Required,is.URL),
+		validation.Field(&u.Location,validation.Required),
+	)
 }

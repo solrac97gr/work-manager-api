@@ -1,28 +1,32 @@
 package routes
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber"
 	"net/http"
 
 	"github.com/solrac97gr/yendoapi/database"
 )
 
 /*GetProfile : Get the user profile*/
-func GetProfile(w http.ResponseWriter, r *http.Request) {
-	ID := r.URL.Query().Get("id")
+func GetProfile(c *fiber.Ctx) {
+	ID := c.Params("id")
 
 	if len(ID) < 1 {
-		http.Error(w, "Parameter ID is required", http.StatusBadRequest)
+		c.Send("Parameter ID is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
 	profile, err := database.SearchProfile(ID)
 	if err != nil {
-		http.Error(w, "Error Occurred"+err.Error(), 400)
+		c.Send("Error Occurred"+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
-
-	w.Header().Set("content-type", "application/json")
-	w.WriteHeader(http.StatusAccepted)
-	_ = json.NewEncoder(w).Encode(&profile)
+	if err := c.JSON(profile); err != nil {
+		c.Status(500).Send(err)
+		return
+	}
+	c.Accepts("application/json")
+	c.SendStatus(http.StatusAccepted)
 }

@@ -1,36 +1,48 @@
 package handlers
 
 import (
-	"log"
-	"net/http"
-	"os"
-
-	"github.com/gorilla/mux"
-	"github.com/rs/cors"
+	"github.com/gofiber/cors"
+	"github.com/gofiber/fiber"
 	"github.com/solrac97gr/yendoapi/middlewares"
 	"github.com/solrac97gr/yendoapi/routes"
+	"log"
 )
 
 /*Handlers : set the port,cors,handlers and then serve the api*/
 func Handlers() {
-	router := mux.NewRouter()
-	/*User : Login and Register routes*/
-	router.HandleFunc("/register", middlewares.CheckDB(routes.Register)).Methods("POST")
-	router.HandleFunc("/login", middlewares.CheckDB(routes.Login)).Methods("POST")
-	/*Profile : Get and Edit*/
-	router.HandleFunc("/profile", middlewares.CheckDB(middlewares.CheckToken(routes.GetProfile))).Methods("GET")
-	router.HandleFunc("/profile", middlewares.CheckDB(middlewares.CheckToken(routes.UpdateProfile))).Methods("PUT")
-	/*Work :Complete CRUD */
-	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routes.CreateWork))).Methods("POST")
-	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routes.UpdateWork))).Methods("PUT")
-	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routes.CreateWork))).Methods("DELETE")
-	router.HandleFunc("/work", middlewares.CheckDB(middlewares.CheckToken(routes.CreateWork))).Methods("GET")
-
-	PORT := os.Getenv("PORT")
-	if PORT == "" {
-		PORT = "8080"
+	app := fiber.New()
+	config := cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "HEAD", "PUT", "DELETE", "PATCH", "OPTION"},
+		AllowCredentials: true,
 	}
-	handler := cors.AllowAll().Handler(router)
-	log.Println("Server run in http://localhost:" + PORT)
-	log.Fatal(http.ListenAndServe(":"+PORT, handler))
+	app.Use(cors.New(config))
+	app.Use(middlewares.CheckDB)
+	app.Get("/", func(c *fiber.Ctx) {
+		if err := c.JSON(fiber.Map{
+			"message": "Hello Yendo!",
+			"status": "online",
+		}); err != nil {
+			c.Status(500).Send(err)
+			return
+		}
+	})
+	/*User : Login and Register routes*/
+	app.Post("/register", routes.Register)
+	app.Post("/login", routes.Login)
+	/*Protected Routes*/
+	app.Use(middlewares.CheckToken)
+	/*Profile : Get and Edit*/
+	app.Get("/profile", routes.GetProfile)
+	app.Put("/profile", routes.UpdateProfile)
+	/*Work :Complete CRUD */
+	app.Post("/work", routes.CreateWork)
+	app.Put("/work", routes.UpdateWork)
+	app.Delete("/work", routes.CreateWork)
+	app.Get("/work", routes.CreateWork)
+
+	err := app.Listen(8080)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }

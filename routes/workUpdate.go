@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber"
 	"net/http"
 
 	"github.com/solrac97gr/yendoapi/database"
@@ -9,24 +9,27 @@ import (
 )
 
 /*UpdateWork : Edit a user profile*/
-func UpdateWork(w http.ResponseWriter, r *http.Request) {
+func UpdateWork(c *fiber.Ctx) {
 	var work models.Work
 	var isUpdated bool
 
-	err := json.NewDecoder(r.Body).Decode(&work)
+	err := c.BodyParser(work)
 	if err != nil {
-		http.Error(w, "Bad request"+err.Error(), 400)
+		c.Send("Bad request" + err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
 	isUpdated, err = database.UpdateWork(work)
 	if err != nil {
-		http.Error(w, "Error ocurred"+err.Error(), 400)
+		c.Send("Error occurred"+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if !isUpdated {
-		http.Error(w, "Can't modify the user register", 400)
+		c.Send("Can't modify the work register")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
+	c.SendStatus(http.StatusCreated)
 }
