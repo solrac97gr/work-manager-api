@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber"
 	"net/http"
 
 	"github.com/solrac97gr/yendoapi/database"
@@ -9,39 +9,42 @@ import (
 )
 
 /*Register : Save a user in the database*/
-func Register(w http.ResponseWriter, r *http.Request) {
+func Register(c *fiber.Ctx) {
 
 	var user models.User
-
-	err := json.NewDecoder(r.Body).Decode(&user)
-	if err != nil {
-		http.Error(w, "Bad request "+err.Error(), 400)
+	if err := c.BodyParser(user); err !=nil{
+		c.Send("Bad request "+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
-
 	/*Validation*/
 	if len(user.Email) == 0 {
-		http.Error(w, "Email is required", 400)
+		c.Send("Email is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if len(user.Password) < 6 {
-		http.Error(w, "Password need at less 6 char", 400)
+		c.Send("Password need at less 6 char")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	_, found, _ := database.UserExist(user.Email)
 	if found {
-		http.Error(w, "Email alredy register", 400)
+		c.Send("Email already register")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	_, isCreated, err := database.UserRegister(user)
 	if err != nil {
-		http.Error(w, "Error at moment to register in the db "+err.Error(), 400)
+		c.Send("Error at moment to register in the db "+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if !isCreated {
-		http.Error(w, "Can't insert the new user", 400)
+		c.Send("Can't insert the new user")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
+	c.SendStatus(http.StatusCreated)
 }
