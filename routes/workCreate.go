@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber"
 	"net/http"
 	"time"
 
@@ -11,36 +11,42 @@ import (
 )
 
 /*CreateWork : Save a user in the database*/
-func CreateWork(w http.ResponseWriter, r *http.Request) {
+func CreateWork(c *fiber.Ctx) {
 
 	var work models.Work
 
-	err := json.NewDecoder(r.Body).Decode(&work)
+	err := c.BodyParser(work)
 	if err != nil {
-		http.Error(w, "Bad request "+err.Error(), 400)
+		c.Send("Bad request " + err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
 	/*Validation*/
 	if len(work.Name) == 0 {
-		http.Error(w, "Name is required", 400)
+		c.Send("Name is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if len(work.Description) == 0 {
-		http.Error(w, "Description is required", 400)
+		c.Send("Description is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if work.Price <= 20 && work.Price >= 500 {
-		http.Error(w, "Price range only in 20 and 500", 400)
+		c.Send("Price range only in 20 and 500")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
 	if len(work.AddressID) == 0 {
-		http.Error(w, "Address ID is required", 400)
+		c.Send("Address ID is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if len(work.CategoryID) == 0 {
-		http.Error(w, "Category ID is required", 400)
+		c.Send("Category ID is required")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
@@ -49,13 +55,15 @@ func CreateWork(w http.ResponseWriter, r *http.Request) {
 
 	_, isCreated, err := database.RegisterWork(work)
 	if err != nil {
-		http.Error(w, "Error at moment to register in the db "+err.Error(), 400)
+		c.Send("Error at moment to register in the db "+err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if !isCreated {
-		http.Error(w, "Can't insert the new work", 400)
+		c.Send("Can't insert the new work")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
+	c.SendStatus(http.StatusCreated)
 }

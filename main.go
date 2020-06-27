@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 func main() {
 	if !database.ConnectionOK() {
 		log.Fatal("Not connected to DB")

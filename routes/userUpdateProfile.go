@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber"
 	"net/http"
 
 	"github.com/solrac97gr/yendoapi/database"
@@ -10,25 +10,27 @@ import (
 )
 
 /*UpdateProfile : Edit a user profile*/
-func UpdateProfile(w http.ResponseWriter, r *http.Request) {
+func UpdateProfile(c *fiber.Ctx) {
 	var user models.User
 	var isUpdated bool
 
-	err := json.NewDecoder(r.Body).Decode(&user)
-	if err != nil {
-		http.Error(w, "Bad request"+err.Error(), 400)
+	if err := c.BodyParser(user); err != nil {
+		c.Send("Bad request" + err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 
-	isUpdated, err = database.ModifyProfile(user, utilities.UserID)
+	isUpdated, err := database.ModifyProfile(user, utilities.UserID)
 	if err != nil {
-		http.Error(w, "Error ocurred"+err.Error(), 400)
+		c.Send("Error occurred" + err.Error())
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
 	if !isUpdated {
-		http.Error(w, "Can't modify the user register", 400)
+		c.Send("Can't modify the user register")
+		c.SendStatus(http.StatusBadRequest)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
+	c.SendStatus(http.StatusCreated)
 
 }
