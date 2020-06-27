@@ -4,7 +4,7 @@
 
 # Yendo API
 
-Yendo Api es un desarrollo hecho con golang y mongoDB que te permite gestionar un sistema para solicitar servicios para el hogar. Cuenta con la tecnología de JWT para mayor seguridad.
+Yendo Api es un desarrollo hecho con golang usando el Framework <a href="https://gofiber.io/">Fiber</a> y mongoDB que te permite gestionar un sistema para solicitar servicios para el hogar. Cuenta con la tecnología de JWT para mayor seguridad.
 
 | Nombre                | Ruta       | Parámetros                  | Estado     | Protegida | Método |
 | --------------------- | ---------- | --------------------------- | ---------- | --------- | ------ |
