@@ -15,7 +15,7 @@ func Login(c *fiber.Ctx) {
 	c.Accepts("application/json")
 
 	var user models.User
-	if err := c.BodyParser(user); err !=nil{
+	if err := c.BodyParser(&user); err !=nil{
 		c.Send("User or password invalid"+err.Error())
 		c.SendStatus(http.StatusBadRequest)
 		return

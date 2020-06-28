@@ -13,7 +13,7 @@ func UpdateWork(c *fiber.Ctx) {
 	var work models.Work
 	var isUpdated bool
 
-	err := c.BodyParser(work)
+	err := c.BodyParser(&work)
 	if err != nil {
 		c.Send("Bad request" + err.Error())
 		c.SendStatus(http.StatusBadRequest)

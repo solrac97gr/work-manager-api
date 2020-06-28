@@ -18,15 +18,7 @@ func Handlers() {
 	}
 	app.Use(cors.New(config))
 	app.Use(middlewares.CheckDB)
-	app.Get("/", func(c *fiber.Ctx) {
-		if err := c.JSON(fiber.Map{
-			"message": "Hello Yendo!",
-			"status": "online",
-		}); err != nil {
-			c.Status(500).Send(err)
-			return
-		}
-	})
+	app.Get("/", routes.Home)
 	/*User : Login and Register routes*/
 	app.Post("/register", routes.Register)
 	app.Post("/login", routes.Login)
@@ -38,8 +30,8 @@ func Handlers() {
 	/*Work :Complete CRUD */
 	app.Post("/work", routes.CreateWork)
 	app.Put("/work", routes.UpdateWork)
-	app.Delete("/work", routes.CreateWork)
-	app.Get("/work", routes.CreateWork)
+	app.Delete("/work", routes.DeleteWork)
+	app.Get("/work", routes.GetWorks)
 
 	err := app.Listen(8080)
 	if err != nil {

@@ -15,7 +15,7 @@ func CreateWork(c *fiber.Ctx) {
 
 	var work models.Work
 
-	err := c.BodyParser(work)
+	err := c.BodyParser(&work)
 	if err != nil {
 		c.Send("Bad request " + err.Error())
 		c.SendStatus(http.StatusBadRequest)

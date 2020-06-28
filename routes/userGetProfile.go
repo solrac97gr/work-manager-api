@@ -9,9 +9,10 @@ import (
 
 /*GetProfile : Get the user profile*/
 func GetProfile(c *fiber.Ctx) {
-	ID := c.Params("id")
+	ID := c.Query("id")
 
 	if len(ID) < 1 {
+		c.Send(ID)
 		c.Send("Parameter ID is required")
 		c.SendStatus(http.StatusBadRequest)
 		return

@@ -12,7 +12,7 @@ import (
 func Register(c *fiber.Ctx) {
 
 	var user models.User
-	if err := c.BodyParser(user); err !=nil{
+	if err := c.BodyParser(&user); err !=nil{
 		c.Send("Bad request "+err.Error())
 		c.SendStatus(http.StatusBadRequest)
 		return
