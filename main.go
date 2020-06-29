@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/solrac97gr/yendoapi/api"
 	"github.com/solrac97gr/yendoapi/database"
-	"github.com/solrac97gr/yendoapi/handlers"
 	"log"
 )
 
@@ -11,5 +11,5 @@ func main() {
 		log.Fatal("Not connected to DB")
 		return
 	}
-	handlers.Handlers()
+	api.Api()
 }

@@ -14,7 +14,7 @@ Yendo Api es un desarrollo hecho con golang usando el Framework <a href="https:/
 | Editar perfil         | /profile   | ninguno                     | Lanzada    | Si        | PUT    |
 | Crear Trabajo         | /work      | ninguno                     | Lanzada    | Si        | POST   |
 | Actualizar Trabajo    | /work      | ninguno                     | Lanzada    | Si        | PUT    |
-| Eliminar Trabajo      | /work      | id                          | No lanzada | Si        | DELETE |
+| Eliminar Trabajo      | /work      | id                          | Lanzada | Si        | DELETE |
 | Listar Trabajos       | /work      | category,id,idate,fdate     | Lanzada | Si        | GET    |
 | Crear pago            | /pay       | ninguno                     | No lanzada | Si        | POST   |
 | Editar pago           | /pay       | id                          | No lanzada | Si        | PUT    |

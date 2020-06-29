@@ -1,4 +1,4 @@
-package handlers
+package api
 
 import (
 	"github.com/gofiber/cors"
@@ -8,12 +8,12 @@ import (
 	"log"
 )
 
-/*Handlers : set the port,cors,handlers and then serve the api*/
-func Handlers() {
+/*Api : set the port,cors,api and then serve the api*/
+func Api() {
 	app := fiber.New()
 	config := cors.Config{
 		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "HEAD", "PUT", "DELETE", "PATCH", "OPTION"},
+		AllowMethods:     []string{"GET", "POST", "HEAD", "PUT", "DELETE", "PATCH", "OPTIONS"},
 		AllowCredentials: true,
 	}
 	app.Use(cors.New(config))
