@@ -19,9 +19,7 @@ func UpdateWork(work models.Work) (bool, error) {
 
 	register := make(map[string]interface{})
 
-	if len(work.Name) > 0 {
-		register["name"] = work.Name
-	}
+
 	if len(work.Description) > 0 {
 		register["description"] = work.Description
 	}
@@ -39,9 +37,9 @@ func UpdateWork(work models.Work) (bool, error) {
 		"$set": register,
 	}
 
-	objtID := work.ID
+	objID := work.ID
 
-	filter := bson.M{"_id": bson.M{"$eq": objtID}}
+	filter := bson.M{"_id": bson.M{"$eq": objID}}
 
 	_, err := col.UpdateOne(ctx, filter, updateString)
 	if err != nil {

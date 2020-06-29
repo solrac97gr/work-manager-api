@@ -18,13 +18,9 @@ func Register(c *fiber.Ctx) {
 		return
 	}
 	/*Validation*/
-	if len(user.Email) == 0 {
-		c.Send("Email is required")
-		c.SendStatus(http.StatusBadRequest)
-		return
-	}
-	if len(user.Password) < 6 {
-		c.Send("Password need at less 6 char")
+	err:=user.Validate()
+	if err != nil{
+		c.Send(err.Error())
 		c.SendStatus(http.StatusBadRequest)
 		return
 	}

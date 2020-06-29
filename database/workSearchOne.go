@@ -10,24 +10,24 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-/*SearchProfile : Get the profile of the user*/
-func SearchProfile(ID string) (models.User, error) {
+/*SearchWork : Get a work by id*/
+func SearchWork(ID string) (models.Work, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
 	db := MongoCN.Database("yendo")
-	col := db.Collection("users")
+	col := db.Collection("works")
 
-	var profile models.User
+	var work models.Work
 	objID, _ := primitive.ObjectIDFromHex(ID)
 
 	condition := bson.M{"_id": objID}
 
-	err := col.FindOne(ctx, condition).Decode(&profile)
-	profile.Password = ""
+	err := col.FindOne(ctx, condition).Decode(&work)
+
 	if err != nil {
 		fmt.Println("Registro no encontrado" + err.Error())
-		return profile, err
+		return work, err
 	}
-	return profile, nil
+	return work, nil
 }

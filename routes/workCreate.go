@@ -22,36 +22,17 @@ func CreateWork(c *fiber.Ctx) {
 		return
 	}
 
-	/*Validation*/
-	if len(work.Name) == 0 {
-		c.Send("Name is required")
-		c.SendStatus(http.StatusBadRequest)
-		return
-	}
-	if len(work.Description) == 0 {
-		c.Send("Description is required")
-		c.SendStatus(http.StatusBadRequest)
-		return
-	}
-	if work.Price <= 20 && work.Price >= 500 {
-		c.Send("Price range only in 20 and 500")
-		c.SendStatus(http.StatusBadRequest)
-		return
-	}
-
-	if len(work.AddressID) == 0 {
-		c.Send("Address ID is required")
-		c.SendStatus(http.StatusBadRequest)
-		return
-	}
-	if len(work.CategoryID) == 0 {
-		c.Send("Category ID is required")
-		c.SendStatus(http.StatusBadRequest)
-		return
-	}
-
 	work.CreateAt = time.Now()
 	work.UserID = utilities.UserID
+
+	/*Validation*/
+
+	err=work.Validate()
+	if err != nil {
+		c.Send(err.Error())
+		c.SendStatus(http.StatusBadRequest)
+		return
+	}
 
 	_, isCreated, err := database.RegisterWork(work)
 	if err != nil {
