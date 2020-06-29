@@ -1,6 +1,7 @@
 package test
 
 import (
+	"github.com/solrac97gr/yendoapi/database/user"
 	"github.com/solrac97gr/yendoapi/utilities"
 	"testing"
 
@@ -35,7 +36,7 @@ func TestUserExist(t *testing.T) {
 	expectedID := "5eada4b7ee3278555b9583c2"
 	expectedExistence := true
 
-	_, exist, userID := database.UserExist("prueba@gmail.com")
+	_, exist, userID := user.UserExist("prueba@gmail.com")
 
 	if expectedID != userID {
 		t.Error("ID's not equals")

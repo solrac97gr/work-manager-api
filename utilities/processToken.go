@@ -2,10 +2,10 @@ package utilities
 
 import (
 	"errors"
+	database "github.com/solrac97gr/yendoapi/database/user"
 	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/models"
 )
 

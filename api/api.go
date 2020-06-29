@@ -33,7 +33,7 @@ func Api() {
 	app.Delete("/work", routes.DeleteWork)
 	app.Get("/work", routes.GetWorks)
 
-	err := app.Listen(8080)
+	err := app.Listen(5000)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

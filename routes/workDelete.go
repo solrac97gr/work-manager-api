@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
-	"github.com/solrac97gr/yendoapi/database"
+	database "github.com/solrac97gr/yendoapi/database/work"
 	"net/http"
 )
 

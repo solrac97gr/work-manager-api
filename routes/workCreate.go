@@ -2,10 +2,10 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
+	work2 "github.com/solrac97gr/yendoapi/database/work"
 	"net/http"
 	"time"
 
-	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/models"
 	"github.com/solrac97gr/yendoapi/utilities"
 )
@@ -34,7 +34,7 @@ func CreateWork(c *fiber.Ctx) {
 		return
 	}
 
-	_, isCreated, err := database.RegisterWork(work)
+	_, isCreated, err := work2.RegisterWork(work)
 	if err != nil {
 		c.Send("Error at moment to register in the db "+err.Error())
 		c.SendStatus(http.StatusBadRequest)

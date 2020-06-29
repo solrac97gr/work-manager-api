@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
+	user2 "github.com/solrac97gr/yendoapi/database/user"
 	"net/http"
 
-	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/models"
 )
 
@@ -24,13 +24,13 @@ func Register(c *fiber.Ctx) {
 		c.SendStatus(http.StatusBadRequest)
 		return
 	}
-	_, found, _ := database.UserExist(user.Email)
+	_, found, _ := user2.UserExist(user.Email)
 	if found {
 		c.Send("Email already register")
 		c.SendStatus(http.StatusBadRequest)
 		return
 	}
-	_, isCreated, err := database.UserRegister(user)
+	_, isCreated, err := user2.UserRegister(user)
 	if err != nil {
 		c.Send("Error at moment to register in the db "+err.Error())
 		c.SendStatus(http.StatusBadRequest)

@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"fmt"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -14,7 +15,7 @@ func DeleteWork(ID string) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
-	db := MongoCN.Database("yendo")
+	db := database.MongoCN.Database("yendo")
 	col := db.Collection("works")
 
 	objID, _ := primitive.ObjectIDFromHex(ID)

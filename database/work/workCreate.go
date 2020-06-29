@@ -2,24 +2,23 @@ package database
 
 import (
 	"context"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"github.com/solrac97gr/yendoapi/models"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-/*UserRegister : Register a user in the database*/
-func UserRegister(user models.User) (string, bool, error) {
+/*RegisterWork : Register a work in the database*/
+func RegisterWork(work models.Work) (string, bool, error) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("yendo")
-	col := db.Collection("users")
+	db := database.MongoCN.Database("yendo")
+	col := db.Collection("works")
 
-	user.Password, _ = EncryptPassword(user.Password)
-
-	result, err := col.InsertOne(ctx, user)
+	result, err := col.InsertOne(ctx, work)
 	if err != nil {
 		return "", false, err
 	}

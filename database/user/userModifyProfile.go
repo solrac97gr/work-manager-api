@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"errors"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"github.com/solrac97gr/yendoapi/models"
@@ -16,7 +17,7 @@ func ModifyProfile(user models.User, ID string) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("yendo")
+	db := database.MongoCN.Database("yendo")
 	col := db.Collection("users")
 
 	register := make(map[string]interface{})

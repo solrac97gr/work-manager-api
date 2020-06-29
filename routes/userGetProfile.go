@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
-	"net/http"
+	database "github.com/solrac97gr/yendoapi/database/user"
 
-	"github.com/solrac97gr/yendoapi/database"
+	"net/http"
 )
 
 /*GetProfile : Get the user profile*/
@@ -20,7 +20,7 @@ func GetProfile(c *fiber.Ctx) {
 
 	profile, err := database.SearchProfile(ID)
 	if err != nil {
-		c.Send("Error Occurred"+err.Error())
+		c.Send("Error Occurred" + err.Error())
 		c.SendStatus(http.StatusBadRequest)
 		return
 	}

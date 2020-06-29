@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"fmt"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"github.com/solrac97gr/yendoapi/models"
@@ -15,7 +16,7 @@ func SearchProfile(ID string) (models.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
-	db := MongoCN.Database("yendo")
+	db := database.MongoCN.Database("yendo")
 	col := db.Collection("users")
 
 	var profile models.User

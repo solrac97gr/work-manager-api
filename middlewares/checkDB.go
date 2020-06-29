@@ -2,9 +2,8 @@ package middlewares
 
 import (
 	"github.com/gofiber/fiber"
-	"net/http"
-
 	"github.com/solrac97gr/yendoapi/database"
+	"net/http"
 )
 
 /*CheckDB : Check the DB connection before to execute a handle func*/

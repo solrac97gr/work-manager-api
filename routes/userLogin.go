@@ -2,10 +2,10 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
+	user2 "github.com/solrac97gr/yendoapi/database/user"
 	"net/http"
 	"time"
 
-	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/jwt"
 	"github.com/solrac97gr/yendoapi/models"
 )
@@ -27,7 +27,7 @@ func Login(c *fiber.Ctx) {
 		return
 	}
 
-	document, exist := database.TryLogin(user.Email, user.Password)
+	document, exist := user2.TryLogin(user.Email, user.Password)
 	if !exist {
 		c.Send("User or password invalid")
 		c.SendStatus(http.StatusBadRequest)

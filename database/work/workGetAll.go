@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"fmt"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -14,7 +15,7 @@ func GetAll(ID string) ([]bson.M, error) {
 	defer cancel()
 
 	var results []bson.M
-	db := MongoCN.Database("yendo")
+	db := database.MongoCN.Database("yendo")
 	col := db.Collection("works")
 
 

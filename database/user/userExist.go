@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"github.com/solrac97gr/yendoapi/models"
@@ -14,7 +15,7 @@ func UserExist(email string) (models.User, bool, string) {
 		30*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("yendo")
+	db := database.MongoCN.Database("yendo")
 	col := db.Collection("users")
 
 	condition := bson.M{"email": email}

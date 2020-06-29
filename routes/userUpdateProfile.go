@@ -2,9 +2,10 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
+	database "github.com/solrac97gr/yendoapi/database/user"
+
 	"net/http"
 
-	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/models"
 	"github.com/solrac97gr/yendoapi/utilities"
 )
@@ -14,7 +15,7 @@ func UpdateProfile(c *fiber.Ctx) {
 	var user models.User
 	var isUpdated bool
 
-	if err := c.BodyParser(user); err != nil {
+	if err := c.BodyParser(&user); err != nil {
 		c.Send("Bad request" + err.Error())
 		c.SendStatus(http.StatusBadRequest)
 		return

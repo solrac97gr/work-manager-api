@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"errors"
+	"github.com/solrac97gr/yendoapi/database"
 	"time"
 
 	"github.com/solrac97gr/yendoapi/models"
@@ -14,11 +15,10 @@ func UpdateWork(work models.Work) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("yendo")
+	db := database.MongoCN.Database("yendo")
 	col := db.Collection("works")
 
 	register := make(map[string]interface{})
-
 
 	if len(work.Description) > 0 {
 		register["description"] = work.Description

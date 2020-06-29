@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gofiber/fiber"
+	work2 "github.com/solrac97gr/yendoapi/database/work"
 	"net/http"
 
-	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/models"
 )
 
@@ -20,7 +20,7 @@ func UpdateWork(c *fiber.Ctx) {
 		return
 	}
 
-	isUpdated, err = database.UpdateWork(work)
+	isUpdated, err = work2.UpdateWork(work)
 	if err != nil {
 		c.Send("Error occurred"+err.Error())
 		c.SendStatus(http.StatusBadRequest)

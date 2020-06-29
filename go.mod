@@ -8,9 +8,7 @@ require (
 	github.com/gofiber/cors v0.2.0
 	github.com/gofiber/fiber v1.12.0
 	github.com/gofiber/utils v0.0.8 // indirect
-	github.com/gorilla/mux v1.7.4
 	github.com/klauspost/compress v1.10.10 // indirect
-	github.com/rs/cors v1.7.0
 	github.com/yuin/goldmark v1.1.32 // indirect
 	go.mongodb.org/mongo-driver v1.3.2
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
