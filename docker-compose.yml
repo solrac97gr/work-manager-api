@@ -4,7 +4,7 @@ version: '3.3'
 services:
   # api is the container name for our Go API
   api:
-    # It will look for a dockerfile in the project root and build it
+    # It will look for a Dockerfile in the project root and build it
     build: "."
     # Exposes the port 5000 from a container and binds it to a random port
     ports:

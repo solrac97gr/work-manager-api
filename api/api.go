@@ -18,6 +18,7 @@ func Api() {
 	}
 	app.Use(cors.New(config))
 	app.Use(middlewares.CheckDB)
+	app.Use(middlewares.RequestLogger)
 	app.Get("/", routes.Home)
 	/*User : Login and Register routes*/
 	app.Post("/register", routes.Register)
