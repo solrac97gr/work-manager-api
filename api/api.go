@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
+	"github.com/solrac97gr/yendoapi/database"
 	"github.com/solrac97gr/yendoapi/middlewares"
 	"github.com/solrac97gr/yendoapi/routes"
 	"log"
@@ -18,7 +19,9 @@ func Api() {
 	}
 	app.Use(cors.New(config))
 	app.Use(middlewares.CheckDB)
-	app.Use(middlewares.RequestLogger)
+	if database.Config.ENV == "dev"{
+		app.Use(middlewares.RequestLogger)
+	}
 	app.Get("/", routes.Home)
 	/*User : Login and Register routes*/
 	app.Post("/register", routes.Register)

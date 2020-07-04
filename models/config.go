@@ -7,4 +7,5 @@ type Configuration struct {
 		Server string
 		Cluster string
 	}
+	ENV string
 }

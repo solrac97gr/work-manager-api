@@ -4,5 +4,6 @@
     "password":"pass",
     "server":"test.mongodb.net",
     "cluster":"test"
-  }
+  },
+  "env": "dev"
 }
