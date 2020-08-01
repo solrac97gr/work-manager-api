@@ -11,5 +11,5 @@ func main() {
 		log.Fatal("Not connected to DB")
 		return
 	}
-	api.Api()
+	api.Init()
 }

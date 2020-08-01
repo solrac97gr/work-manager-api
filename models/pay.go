@@ -1,6 +1,7 @@
 package models
 
 import (
+	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -14,4 +15,14 @@ type Pay struct {
 	PayMethodID string             `bson:"pay_method_id" json:"pay_method_id,omitempty"`
 	WorkID      string             `bson:"work_id" json:"work_id,omitempty"`
 	UserID      string             `bson:"user_id" json:"user_id,omitempty"`
+}
+
+func (p *Pay) Validate() error {
+	return validation.ValidateStruct(p,
+		validation.Field(&p.Amount, validation.Min(20)),
+		validation.Field(&p.Date,validation.Required),
+		validation.Field(&p.PayMethodID,validation.Required),
+		validation.Field(&p.WorkID,validation.Required),
+		validation.Field(&p.UserID,validation.Required),
+	)
 }

@@ -24,10 +24,7 @@ func (u *User) Validate() error {
 	return validation.ValidateStruct(u,
 		validation.Field(&u.Name,validation.Required),
 		validation.Field(&u.Lastname,validation.Required),
-		validation.Field(&u.Birthdate,validation.Required),
 		validation.Field(&u.Email, validation.Required, is.Email),
 		validation.Field(&u.Password,validation.Required,validation.Length(6,32)),
-		validation.Field(&u.Avatar,validation.Required,is.URL),
-		validation.Field(&u.Location,validation.Required),
 	)
 }

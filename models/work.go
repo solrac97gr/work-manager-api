@@ -23,11 +23,11 @@ type Work struct {
 func (w Work) Validate() error {
 	return validation.ValidateStruct(&w,
 		validation.Field(&w.Description, validation.Required, validation.Length(20, 50)),
-		validation.Field(&w.PhotoUrl,validation.Required,is.URL),
+		validation.Field(&w.PhotoUrl, validation.Required, is.URL),
 		validation.Field(&w.CreateAt, validation.Required),
 		validation.Field(&w.UserID, validation.Required),
 		validation.Field(&w.AddressID, validation.Required),
 		validation.Field(&w.CategoryID, validation.Required),
-		validation.Field(&w.PayMethodID,validation.Required),
+		validation.Field(&w.PayMethodID, validation.Required),
 	)
 }
