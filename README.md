@@ -1,8 +1,4 @@
-<p align="center"><a href="https://estamosyendo.com" target="_blank" rel="noopener noreferrer">
-<img src="https://scontent.flim18-2.fna.fbcdn.net/v/t1.0-9/88060511_108312617440872_2803505826193473536_n.png?_nc_cat=100&_nc_sid=85a577&_nc_eui2=AeGrPWXWrXUWlRPxq5nx7zrSyTprspERJb7JOmuykRElvheDnQllD6WTAYgwSvQjyV6Wecifpct7rhVJLGTSxsSU&_nc_ohc=H64p2KWqeGwAX82hWAl&_nc_ht=scontent.flim18-2.fna&oh=bbc133be3fc34f1749ab0206c0d352a9&oe=5ED28441" alt="drawing" width="200"/></a></p>
-<h2 align="center">Servicio técnico a domicilio</h2>
-
-# Yendo API
+# Work Manager API
 
 Yendo Api es un desarrollo hecho con golang y mongoDB que te permite gestionar un sistema para solicitar servicios para el hogar. Cuenta con la tecnología de JWT para mayor seguridad.
 
